@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ToDo-List</title>
+      <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <script src="app.js"></script>
+      <div class="todo-app">
+           <h2>ToDo-List <img src="img/download.png"></h2> 
+<div class="row">
+      <input type="text" id="input-box" placeholder="Add Your Test">
+      <button onclick="addtask()">Add Task</button>
+</div>
+<ul id="list-con">
+      <!-- <li class="checked">Task-1</li>
+      <li>Task-2</li>
+      <li>Task-3</li> -->
+
+</ul>
+      </div>
+      <script>
+            let listContainer=document.getElementById
+('list-con')
+let inputBox=document.getElementById('input-box')
+function addtask(){
+      if(inputBox.value===''){
+            alert('Add your task');
+      }
+      else{
+      let task=document.createElement('li')
+      task.textContent=inputBox.value
+      listContainer.appendChild(task)
+      let span=document.createElement('span');
+      span.textContent='\u00d7';
+      task.appendChild(span)
+}
+inputBox.value=''
+saveData()
+}
+
+listContainer.addEventListener('click', (el)=>{
+if(el.target.tagName=='LI'){
+      el.target.classList.toggle('checked')
+      saveData()
+}
+else if(el.target.tagName =='SPAN') {
+      el.target.parentElement.remove()
+      saveData()
+}
+
+})
+function saveData(){
+      localStorage.setItem("tasks",listContainer.innerHTML)
+}
+function showData(){
+     listContainer.innerHTML= localStorage.getItem('tasks')
+}
+showData()
+
+      </script>
+</body>
+</html>
